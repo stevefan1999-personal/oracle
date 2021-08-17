@@ -1,0 +1,15 @@
+# Source: kuberhealthy/templates/poddisruptionbudget.yaml
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: kuberhealthy-pdb
+  namespace: kuberhealthy
+  annotations:
+    meta.helm.sh/release-name: 'kuberhealthy'
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: kuberhealthy

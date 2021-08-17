@@ -1,0 +1,35 @@
+# Source: kuberhealthy/templates/khcheck-dns-internal.yaml
+apiVersion: comcast.github.io/v1
+kind: KuberhealthyCheck
+metadata:
+  name: dns-status-internal
+  namespace: kuberhealthy
+  annotations:
+    meta.helm.sh/release-name: 'kuberhealthy'
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
+spec:
+  runInterval: 2m
+  timeout: 15m
+  podSpec:
+    securityContext:
+      runAsUser: 999
+      fsGroup: 999
+    containers:
+      - env:
+          - name: NODE_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+          - name: HOSTNAME
+            value: "kubernetes.default"
+        image: kuberhealthy/dns-resolution-check:v1.4.3
+        imagePullPolicy: IfNotPresent
+        name: main
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true

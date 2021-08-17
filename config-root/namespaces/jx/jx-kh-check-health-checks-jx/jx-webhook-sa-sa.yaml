@@ -1,0 +1,10 @@
+# Source: jx-kh-check/templates/jx-webhook-check.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jx-webhook-sa
+  namespace: jx
+  annotations:
+    meta.helm.sh/release-name: 'health-checks-jx'
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'

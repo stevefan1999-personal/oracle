@@ -1,0 +1,10 @@
+# Source: jx-kh-check/templates/jx-pod-status-check.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jx-pod-status-sa
+  namespace: kuberhealthy
+  annotations:
+    meta.helm.sh/release-name: 'jx-kh-check'
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
