@@ -20,7 +20,7 @@ spec:
   - key: staging
   - key: production
   ingress:
-    domain: ""
+    domain: stevefan1999.wtf
     externalDNS: false
     namespaceSubDomain: -jx.
     tls:
